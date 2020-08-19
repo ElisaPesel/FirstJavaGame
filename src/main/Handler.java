@@ -1,6 +1,6 @@
 package main;
 
-import java.awt.*;
+import java.awt.Graphics;
 import java.util.LinkedList;
 
 public class Handler {
@@ -23,5 +23,25 @@ public class Handler {
         }
     }
 
-    
+    public void clearEnemies(){
+        for(int i = 0; i < object.size(); i++){
+            GameObject tempObject = object.get(i);
+
+            if(tempObject.getId() == ID.Player) {
+                object.clear();
+            }
+
+            if(tempObject.getId() == ID.Player || tempObject.getId() == ID.Player2){
+                object.clear();
+            }
+        }
+    }
+
+    public void addObject(GameObject object){
+        this.object.add(object);
+    }
+
+    public void removeObject(GameObject object){
+        this.object.remove(object);
+    }
 }

@@ -6,7 +6,7 @@ import java.awt.event.KeyEvent;
 public class KeyInput extends KeyAdapter {
 
     private Handler handler;
-    private boolean[] keyDown = new boolean[4];
+    private boolean[] keyDown = new boolean[8];
 
     public KeyInput(Handler handler){
         this.handler = handler;
@@ -15,6 +15,10 @@ public class KeyInput extends KeyAdapter {
         keyDown[1] = false;
         keyDown[2] = false;
         keyDown[3] = false;
+        keyDown[4] = false;
+        keyDown[5] = false;
+        keyDown[6] = false;
+        keyDown[7] = false;
     }
 
     public void keyPressed(KeyEvent e){
@@ -30,6 +34,14 @@ public class KeyInput extends KeyAdapter {
                 if(key == KeyEvent.VK_S) { tempObject.setVelY(5); keyDown[1] = true; }
                 if(key == KeyEvent.VK_D) { tempObject.setVelX(5); keyDown[2] = true; }
                 if(key == KeyEvent.VK_A) { tempObject.setVelX(-5); keyDown[3] = true; }
+            }
+            if(tempObject.getId() == ID.Player2){
+                //key events for Player 2
+
+                if(key == KeyEvent.VK_UP) { tempObject.setVelY(-5); keyDown[4] = true; }
+                if(key == KeyEvent.VK_DOWN) { tempObject.setVelY(5); keyDown[5] = true; }
+                if(key == KeyEvent.VK_RIGHT) { tempObject.setVelX(5); keyDown[6] = true; }
+                if(key == KeyEvent.VK_LEFT) { tempObject.setVelX(-5); keyDown[7] = true; }
             }
         }
 
@@ -55,6 +67,20 @@ public class KeyInput extends KeyAdapter {
 
                 //horizontal movement
                 if(!keyDown[2] && !keyDown[3]) tempObject.setVelX(0);
+            }
+            if(tempObject.getId() == ID.Player2){
+                //key events for Player 1
+
+                if(key == KeyEvent.VK_UP) keyDown[4] = false;
+                if(key == KeyEvent.VK_DOWN) keyDown[5] = false;
+                if(key == KeyEvent.VK_RIGHT) keyDown[6] = false;
+                if(key == KeyEvent.VK_LEFT) keyDown[7] = false;
+
+                //vertical movement
+                if(!keyDown[4] && !keyDown[5]) tempObject.setVelY(0);
+
+                //horizontal movement
+                if(!keyDown[6] && !keyDown[7]) tempObject.setVelX(0);
             }
         }
     }

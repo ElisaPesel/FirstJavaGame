@@ -2,18 +2,18 @@ package main;
 
 import java.awt.*;
 
-public class SmartEnemy extends GameObject {
+public class SmartEnemy2 extends GameObject {
 
     private Handler handler;
     private GameObject player;
 
-    public SmartEnemy(int x, int y, ID id, Handler handler) {
+    public SmartEnemy2(int x, int y, ID id, Handler handler) {
         super(x, y, id);
 
         this.handler = handler;
 
         for(int i = 0; i < handler.object.size(); i++){
-            if(handler.object.get(i).getId() == ID.Player){
+            if(handler.object.get(i).getId() == ID.Player2){
                 player = handler.object.get(i);
             }
         }

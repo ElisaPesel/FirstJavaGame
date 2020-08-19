@@ -2,22 +2,26 @@ package main;
 
 import java.awt.*;
 
-public class BasicEnemy extends GameObject {
+public class SmartEnemy extends GameObject {
 
     private Handler handler;
+    private GameObject player;
 
-    public BasicEnemy(int x, int y, ID id, Handler handler) {
+    public SmartEnemy(int x, int y, ID id, Handler handler) {
         super(x, y, id);
 
         this.handler = handler;
 
-        velX = 5;
-        velY = 5;
+        for(int i = 0; i < handler.object.size(); i++){
+            if(handler.object.get(i).getId() == ID.Player){
+                player = handler.object.get(i);
+            }
+        }
     }
 
     @Override
     public Rectangle getBounds() {
-        return new Rectangle(x, y, 16, 16);
+        return new Rectangle((int)x, (int)y, 16, 16);
     }
 
     @Override
@@ -25,15 +29,22 @@ public class BasicEnemy extends GameObject {
         x += velX;
         y += velY;
 
-        if(y <= 0 || y >= Game.HEIGHT - 60) velY *= -1;
-        if(x <= 0 || x >= Game.WIDTH - 28) velX *= -1;
+        float diffX = x - player.getX() - 16;
+        float diffY = y - player.getY() - 16;
+        float distance = (float) Math.sqrt((x - player.getX()) * (x - player.getX()) + (y - player.getY()) * (y - player.getY()));
 
-        handler.addObject(new Trail(x, y, ID.Tail, Color.red, 16, 16, 0.04f, handler));
+        velX = ((-1 / distance) * diffX);
+        velY = ((-1 / distance) * diffY);
+
+        //if(y <= 0 || y >= Game.HEIGHT - 60) velY *= -1;
+        //if(x <= 0 || x >= Game.WIDTH - 28) velX *= -1;
+
+        handler.addObject(new Trail(x, y, ID.Tail, Color.orange, 16, 16, 0.04f, handler));
     }
 
     @Override
     public void render(Graphics g) {
-        g.setColor(Color.red);
-        g.fillRect(x, y, 16, 16);
+        g.setColor(Color.orange);
+        g.fillRect((int)x, (int)y, 16, 16);
     }
 }

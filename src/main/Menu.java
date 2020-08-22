@@ -62,6 +62,7 @@ public class Menu extends MouseAdapter {
         if(game.gameState == Game.STATE.End){
             if(mouseOver(mx, my, 213,350,200, 64)){
                 game.gameState = Game.STATE.Menu;
+                Spawn.scoreKeep = 0;
                 hud.setScore(0);
                 hud.setLevel(1);
             }
@@ -69,9 +70,9 @@ public class Menu extends MouseAdapter {
             //try again button single player
             if(mouseOver(mx,my, 213, 270, 200, 64)){
                 game.gameState = Game.STATE.Game;
+                Spawn.scoreKeep = 0;
                 hud.setScore(0);
                 hud.setLevel(1);
-                Spawn.scoreKeep = 0;
                 handler.addObject(new Player(Game.WIDTH/2-32, Game.HEIGHT/2-32, ID.Player, handler));
                 HUD.HEALTH = 100;
             }
@@ -81,6 +82,7 @@ public class Menu extends MouseAdapter {
         if(game.gameState == Game.STATE.End2){
             if(mouseOver(mx, my, 213,350,200, 64)){
                 game.gameState = Game.STATE.Menu;
+                Spawn.scoreKeep = 0;
                 hud.setScore(0);
                 hud.setLevel(1);
             }
@@ -88,9 +90,9 @@ public class Menu extends MouseAdapter {
             //try again button multiplayer
             if(mouseOver(mx,my, 213, 270, 200, 64)){
                 game.gameState = Game.STATE.Multi;
+                Spawn.scoreKeep = 0;
                 hud.setScore(0);
                 hud.setLevel(1);
-                Spawn.scoreKeep = 0;
                 handler.addObject(new Player(240, 200, ID.Player, handler));
                 handler.addObject(new Player2(350, 200, ID.Player2, handler));
                 HUD.HEALTH = 100;
